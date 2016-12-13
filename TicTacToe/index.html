@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <link href="TicTacToeCSS.css" rel="stylesheet" />
+</head>
+<body>
+    <table>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+    <input type="checkbox" id="startFromX" checked="checked" onclick="IsX()" />Start from  "X"
+    <input type="button" value="New Game" onclick="ClearGame()" />
+    <script>
+
+        var sign;
+        IsX();
+        var tds = document.querySelectorAll("td");
+        var vinner;
+
+        tds.forEach(function (td) {
+            td.addEventListener("click", function () {
+                if (!this.innerHTML) {
+                    this.innerHTML = sign;
+                }
+                if (tds[0].innerHTML == sign && tds[1].innerHTML == sign && tds[2].innerHTML == sign
+                   || tds[3].innerHTML == sign && tds[4].innerHTML == sign && tds[5].innerHTML == sign
+                    || tds[6].innerHTML == sign && tds[7].innerHTML == sign && tds[8].innerHTML == sign
+                    || tds[0].innerHTML == sign && tds[4].innerHTML == sign && tds[8].innerHTML == sign
+                    || tds[2].innerHTML == sign && tds[4].innerHTML == sign && tds[6].innerHTML == sign
+                    || tds[1].innerHTML == sign && tds[4].innerHTML == sign && tds[7].innerHTML == sign
+                    || tds[2].innerHTML == sign && tds[5].innerHTML == sign && tds[8].innerHTML == sign
+                    || tds[0].innerHTML == sign && tds[3].innerHTML == sign && tds[6].innerHTML == sign)
+                    setTimeout(function () {
+                        alert("Great! \n" + vinner + " Wins!");
+                        //location.reload();
+                        ClearGame();
+                    }, 10)
+                sign = sign == "X" ? "O" : "X";
+                vinner = sign == "X" ? "O" : "X";
+            });
+        });
+
+        function IsX() {
+            if (document.getElementById("startFromX").checked) {
+                sign = "X";
+            } else {
+                sign = "O";
+            }
+        }
+
+        function ClearGame() {
+            IsX()
+            for (var i = 0; i < tds.length; i++) {
+                tds[i].innerHTML = "";
+            }
+        }
+
+    </script>
+</body>
+</html>
